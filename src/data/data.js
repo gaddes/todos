@@ -2,7 +2,7 @@ export default {
   tasks: [
     {
       name: 'laundry',
-      checked: true,
+      checked: false,
       category: 'home',
     },
     {
