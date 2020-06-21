@@ -1,18 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { setFilter } from '../../redux/actions';
 
 const Picker = props => {
-  const { categories, setCategories } = props;
-
-  const handleSelect = (e) => {
-    const { value } = e.target;
-
-    if (!value) {
-      // Set all categories as visible
-      setCategories({ ...categories, visible: categories.all});
-      return;
-    }
-
-    setCategories({ ...categories, visible: [value]});
+  const handleSelect = e => {
+    props.setFilter({
+      value: e.target.value,
+    });
   };
 
   return (
@@ -24,4 +19,4 @@ const Picker = props => {
   );
 };
 
-export default Picker;
+export default connect(null, { setFilter })(Picker);

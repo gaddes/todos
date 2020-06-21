@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { addTask } from '../../redux/actions';
 
 const AddTask = props => {
   const [name, setName] = useState('');
@@ -8,15 +11,11 @@ const AddTask = props => {
     // Prevent page refresh
     e.preventDefault();
 
-    // Construct new task object
-    const task = {
+    // Dispatch action which will add new task object to existing array
+    props.addTask({
       name,
-      checked: false, // Default when new task added
       category,
-    };
-
-    // Add new task object to existing array
-    props.setTasks([...props.tasks, task]);
+    });
 
     // Reset state (clear input fields)
     setName('');
@@ -44,4 +43,8 @@ const AddTask = props => {
   );
 };
 
-export default AddTask;
+const mapStateToProps = state => ({
+  tasks: state.tasks,
+});
+
+export default connect(mapStateToProps, { addTask })(AddTask);
